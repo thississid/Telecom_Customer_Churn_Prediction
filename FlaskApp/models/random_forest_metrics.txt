@@ -1,0 +1,16 @@
+Model: random_forest
+Accuracy: 0.951310861423221
+
+Classification Report:
+              precision    recall  f1-score   support
+
+       False       0.95      1.00      0.97       456
+        True       0.98      0.68      0.80        78
+
+    accuracy                           0.95       534
+   macro avg       0.96      0.84      0.89       534
+weighted avg       0.95      0.95      0.95       534
+
+Confusion Matrix:
+[[455   1]
+ [ 25  53]]
