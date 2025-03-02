@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
+from markupsafe import Markup
 import pandas as pd
 import joblib
 import os
@@ -6,7 +7,7 @@ import os
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
-
+ 
 # Load pre-trained models and scaler
 logistic_model = joblib.load('models/logistic_model.pkl')
 rf_model = joblib.load('models/random_forest_model.pkl')
