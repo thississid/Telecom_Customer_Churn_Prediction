@@ -12,10 +12,34 @@
     </header>
     <div class="container">
         <h2>Model Performance Metrics</h2>
-        <h3>Logistic Regression</h3>
-        <pre>{{ logistic_metrics }}</pre>
-        <h3>Random Forest</h3>
-        <pre>{{ rf_metrics }}</pre>
+
+        <table border="1" class="table">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1-Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Logistic Regression</td>
+                    <td>{{ logistic_accuracy }}</td>
+                    <td>{{ logistic_precision }}</td>
+                    <td>{{ logistic_recall }}</td>
+                    <td>{{ logistic_f1 }}</td>
+                </tr>
+                <tr>
+                    <td>Random Forest</td>
+                    <td>{{ rf_accuracy }}</td>
+                    <td>{{ rf_precision }}</td>
+                    <td>{{ rf_recall }}</td>
+                    <td>{{ rf_f1 }}</td>
+                </tr>
+            </tbody>
+        </table>
 
         <h2>Upload Test Dataset</h2>
         <form method="POST" enctype="multipart/form-data">
@@ -23,7 +47,7 @@
             <input type="file" name="file" id="file" required>
             <button type="submit">Upload</button>
         </form>
-        
+
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <ul>
