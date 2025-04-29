@@ -12,7 +12,6 @@
     </header>
     <div class="container">
         <h2>Model Performance Metrics</h2>
-
         <table border="1" class="table">
             <thead>
                 <tr>
@@ -37,6 +36,13 @@
                     <td>{{ rf_precision }}</td>
                     <td>{{ rf_recall }}</td>
                     <td>{{ rf_f1 }}</td>
+                </tr>
+                <tr>
+                    <td>Deep Learning Model</td>
+                    <td>{{ dl_accuracy }}</td>
+                    <td>{{ dl_precision }}</td>
+                    <td>{{ dl_recall }}</td>
+                    <td>{{ dl_f1 }}</td>
                 </tr>
             </tbody>
         </table>

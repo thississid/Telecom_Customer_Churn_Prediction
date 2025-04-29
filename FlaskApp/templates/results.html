@@ -1,18 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Results</title>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <style>
+    /* Cell coloring */
+    .correct { background-color: #d4edda !important; }
+    .wrong   { background-color: #f8d7da !important; }
+
+    /* Ensure everything is centered in the page */
+    body {
+      text-align: center;
+    }
+    /* Limit the page width and center it */
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      text-align: left;
+    }
+    /* Center the summary badges row */
+    .summary-row {
+      justify-content: center;
+    }
+    /* Center the table and allow horizontal scroll */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .table-container table {
+      margin: 0 auto;
+      min-width: 800px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Results Table</h1>
-        <div>
-            {{ table_html|safe }}
-        </div>
-        <a href="{{ predictions_file }}" class="btn btn-primary mt-3" download>Download Predictions</a>
+  <div class="page-container">
+
+    <h1 class="mb-4">Predictions Summary</h1>
+
+    <div class="row summary-row mb-4">
+      <div class="col-auto">
+        <strong>Logistic Regression:</strong>
+        <span class="badge badge-success">{{ logistic_correct }}</span> correct,
+        <span class="badge badge-danger">{{ logistic_wrong }}</span> wrong
+      </div>
+      <div class="col-auto">
+        <strong>Random Forest:</strong>
+        <span class="badge badge-success">{{ rf_correct }}</span> correct,
+        <span class="badge badge-danger">{{ rf_wrong }}</span> wrong
+      </div>
+      <div class="col-auto">
+        <strong>Deep Learning:</strong>
+        <span class="badge badge-success">{{ dl_correct }}</span> correct,
+        <span class="badge badge-danger">{{ dl_wrong }}</span> wrong
+      </div>
     </div>
+
+    <div class="table-container">
+      <table class="table table-bordered table-sm">
+        <thead class="thead-light">
+          <tr>
+            {% for col in columns %}
+              <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+              {% for col in columns %}
+                {% set val = row[col] %}
+                {% if col in ['Logistic_Prediction','RF_Prediction','DL_Prediction'] %}
+                  {% set actual = row['Churn'] %}
+                  {% set css = 'correct' if val == actual else 'wrong' %}
+                  <td class="{{ css }}">{{ val }}</td>
+                {% else %}
+                  <td>{{ val }}</td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <a href="{{ predictions_file }}" class="btn btn-primary mb-5" download>
+      Download CSV
+    </a>
+
+  </div>
 </body>
 </html>

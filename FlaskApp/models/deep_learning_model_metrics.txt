@@ -1,0 +1,16 @@
+Model: deep_learning_model
+Accuracy: 0.9044943820224719
+
+Classification Report:
+              precision    recall  f1-score   support
+
+       False       0.92      0.97      0.95       456
+        True       0.75      0.51      0.61        78
+
+    accuracy                           0.90       534
+   macro avg       0.84      0.74      0.78       534
+weighted avg       0.90      0.90      0.90       534
+
+Confusion Matrix:
+[[443  13]
+ [ 38  40]]
